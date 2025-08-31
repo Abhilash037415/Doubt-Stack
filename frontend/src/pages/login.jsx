@@ -8,7 +8,7 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // after successful login logic, navigate to home/dashboard
-    navigate("/"); // or later you can make navigate("/home")
+    navigate("/home"); // or later you can make navigate("/home")
   };
 
   return (
