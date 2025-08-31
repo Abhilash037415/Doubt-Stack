@@ -1,0 +1,115 @@
+* {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background: #f4f6f8;
+        color: #2c3e50;
+      }
+
+      /* ---------------- LOGIN PAGE ---------------- */
+      .login-page .container {
+        display: flex;
+        height: 100vh;
+      }
+
+      /* Left (Form Area) */
+      .login-page .left {
+        flex: 1;
+        padding: 50px;
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .login-page .left h2 {
+        margin-bottom: 25px;
+        font-size: 24px;
+        color: #3f51b5;
+      }
+
+      .login-page .form-group {
+        margin-bottom: 18px;
+      }
+
+      .login-page label {
+        font-size: 14px;
+        font-weight: bold;
+        color: #555;
+      }
+
+      .login-page input {
+        width: 100%;
+        padding: 12px;
+        margin-top: 6px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        transition: 0.2s;
+      }
+
+      .login-page input:focus {
+        border-color: #3f51b5;
+        outline: none;
+        box-shadow: 0 0 6px rgba(63, 81, 181, 0.3);
+      }
+
+      .login-page button {
+        padding: 12px;
+        background: #3f51b5;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 16px;
+        transition: 0.3s;
+        margin-top: 10px;
+      }
+
+      .login-page button:hover {
+        background: #303f9f;
+      }
+
+      .login-page .form-footer {
+        margin-top: 12px;
+        font-size: 14px;
+        color: #555;
+      }
+
+      .login-page .form-footer a {
+        color: #3f51b5;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .login-page .form-footer a:hover {
+        text-decoration: underline;
+      }
+
+      /* Right (Info Section) */
+      .login-page .right {
+        flex: 1;
+        background: linear-gradient(135deg, #3f51b5, #5c6bc0);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 50px;
+        text-align: center;
+      }
+
+      .login-page .right h1 {
+        margin-bottom: 20px;
+        font-size: 32px;
+      }
+
+      .login-page .right p {
+        margin-bottom: 10px;
+        font-size: 16px;
+        line-height: 1.4;
+      }
