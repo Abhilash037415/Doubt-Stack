@@ -1,14 +1,58 @@
 // src/pages/Login.jsx
 import { useNavigate } from "react-router-dom";
-import "./login.css"; // move your CSS into a separate file
+import "./login.css";
 
 function Login() {
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // after successful login logic, navigate to home/dashboard
-    navigate("/home"); // or later you can make navigate("/home")
+
+    const usernameOrEmail = document.getElementById("username_or_email").value;
+    const password = document.getElementById("password").value;
+
+    // --- FRONTEND VALIDATION ---
+    if (!usernameOrEmail || !password) {
+      alert("All fields are required!");
+      return;
+    }
+
+    // If it's an email, do a simple format check
+    if (usernameOrEmail.includes("@")) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(usernameOrEmail)) {
+        alert("Please enter a valid email address!");
+        return;
+      }
+    }
+
+    if (password.length < 6) {
+      alert("Password must be at least 6 characters long!");
+      return;
+    }
+
+    try {
+      // --- BACKEND REQUEST ---
+      const res = await fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ usernameOrEmail, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert("✅ Login successful!");
+        navigate("/home");
+      } else {
+        alert(`❌ Login failed: ${data.error}`);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("⚠️ Something went wrong, please try again.");
+    }
   };
 
   return (
@@ -43,7 +87,10 @@ function Login() {
 
             <div className="form-footer">
               Don’t have an account?{" "}
-              <a onClick={() => navigate("/signup")} style={{ cursor: "pointer" }}>
+              <a
+                onClick={() => navigate("/signup")}
+                style={{ cursor: "pointer" }}
+              >
                 Click here
               </a>
             </div>
@@ -64,4 +111,4 @@ function Login() {
   );
 }
 
-export default Login
+export default Login;
