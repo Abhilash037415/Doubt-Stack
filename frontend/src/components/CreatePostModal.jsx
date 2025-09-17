@@ -1,7 +1,10 @@
-import React from "react";
+import { useState } from "react";
 
-export default function CreatePostModal({ show, onClose }) {
-  if (!show) return null;
+function CreatePostModal({ onClose }) {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [tags, setTags] = useState("");
+  const [type, setType] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -10,26 +13,26 @@ export default function CreatePostModal({ show, onClose }) {
   };
 
   return (
-    <div className="modal" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+    <div className="modal">
+      <div className="modal-content">
         <span className="close" onClick={onClose}>&times;</span>
         <h2>Create New Post</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Title</label>
-            <input type="text" placeholder="What's your question or topic?" required />
+            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
           </div>
           <div className="form-group">
             <label>Description</label>
-            <textarea placeholder="Provide more details..." rows="5" required></textarea>
+            <textarea value={content} onChange={(e) => setContent(e.target.value)} rows="5" required />
           </div>
           <div className="form-group">
             <label>Tags (comma-separated)</label>
-            <input type="text" placeholder="e.g., JavaScript, React, Assignment" />
+            <input type="text" value={tags} onChange={(e) => setTags(e.target.value)} />
           </div>
           <div className="form-group">
             <label>Post Type</label>
-            <select required>
+            <select value={type} onChange={(e) => setType(e.target.value)} required>
               <option value="">Select type</option>
               <option value="question">Question</option>
               <option value="discussion">Discussion</option>
@@ -43,3 +46,5 @@ export default function CreatePostModal({ show, onClose }) {
     </div>
   );
 }
+
+export default CreatePostModal;

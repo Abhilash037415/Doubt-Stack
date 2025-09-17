@@ -36,34 +36,43 @@ export default function Landing() {
     },
   ];
 
+  const filteredPosts = posts.filter(
+    (p) =>
+      p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      p.content.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="home-page">
-      <Sidebar setActiveSection={setActiveSection} />
+      {/* Sidebar */}
+      <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} />
 
       <div className="main-content">
+        {/* Topbar */}
         <Topbar onSearch={setSearchTerm} openModal={() => setShowModal(true)} />
 
+        {/* Main Section */}
         <div className="content-area">
           {activeSection === "home" && (
             <div id="home-section" className="section active">
               <div className="welcome-banner">
                 <h1>Welcome to DoubtStack 👋</h1>
                 <p>Ask questions, share knowledge, and connect with classmates</p>
-                <button className="cta-button" onClick={() => setShowModal(true)}>
+                <button
+                  className="cta-button"
+                  onClick={() => setShowModal(true)}
+                >
                   Ask Your First Question
                 </button>
               </div>
 
+              {/* Posts */}
               <div className="posts">
-                {posts
-                  .filter(
-                    (p) =>
-                      p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                      p.content.toLowerCase().includes(searchTerm.toLowerCase())
-                  )
-                  .map((post, i) => (
-                    <Post key={i} {...post} />
-                  ))}
+                {filteredPosts.length > 0 ? (
+                  filteredPosts.map((post, i) => <Post key={i} {...post} />)
+                ) : (
+                  <p>No posts found.</p>
+                )}
               </div>
             </div>
           )}
@@ -84,7 +93,9 @@ export default function Landing() {
         </div>
       </div>
 
+      {/* Create Post Modal */}
       <CreatePostModal show={showModal} onClose={() => setShowModal(false)} />
     </div>
   );
 }
+     

@@ -1,37 +1,25 @@
-import React from "react";
+// src/components/Sidebar.jsx
+import { Link, NavLink } from "react-router-dom";
 
-export default function Sidebar({ setActiveSection }) {
+function Sidebar() {
   return (
     <div className="sidebar">
       <h2>DoubtStack</h2>
       <nav>
-        <button className="nav-link" onClick={() => setActiveSection("home")}>
-          🏠 Home
-        </button>
-        <button className="nav-link" onClick={() => setActiveSection("recent")}>
-          🕐 Recent
-        </button>
-        <button className="nav-link" onClick={() => setActiveSection("feed")}>
-          ⚙️ Customize Feed
-        </button>
-        <button className="nav-link" onClick={() => setActiveSection("groups")}>
-          👥 Study Groups
-        </button>
-        <button className="nav-link" onClick={() => setActiveSection("department")}>
-          🏫 Department Posts
-        </button>
-        <button className="nav-link" onClick={() => setActiveSection("saved")}>
-          ⭐ Saved Posts
-        </button>
+        <NavLink to="/home" className="nav-link">🏠 Home</NavLink>
+        <NavLink to="/recent-activity" className="nav-link">🕐 Recent</NavLink>
+        <NavLink to="/customize-feed" className="nav-link">⚙️ Customize Feed</NavLink>
+        <NavLink to="/study-groups" className="nav-link">👥 Study Groups</NavLink>
+        <NavLink to="/department-posts" className="nav-link">🏫 Department Posts</NavLink>
+        <NavLink to="/saved-posts" className="nav-link">⭐ Saved Posts</NavLink>
       </nav>
+
       <div className="sidebar-footer">
-        <button className="nav-link" onClick={() => setActiveSection("profile")}>
-          👤 Profile
-        </button>
-        <a href="index.html" className="nav-link logout">
-          🚪 Logout
-        </a>
+        <NavLink to="/profile" className="nav-link">👤 Profile</NavLink>
+        <Link to="/" className="nav-link logout">🚪 Logout</Link>
       </div>
     </div>
   );
 }
+
+export default Sidebar;
