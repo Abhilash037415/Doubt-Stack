@@ -1,6 +1,10 @@
 import React from "react";
+import { useApp } from "../context/AppContext";
 
-export default function Topbar({ onSearch, openModal }) {
+export default function Topbar({ onSearch, openModal, onNotificationClick }) {
+  const { notifications } = useApp();
+  const unreadCount = notifications.filter(n => !n.read).length;
+
   return (
     <div className="topbar">
       <input
@@ -10,16 +14,23 @@ export default function Topbar({ onSearch, openModal }) {
         onChange={(e) => onSearch(e.target.value)}
       />
       <div className="top-icons">
-        <span title="Notifications" onClick={() => alert("Notifications panel would open here")}>
+        <span
+          title="Notifications"
+          onClick={onNotificationClick}
+          className="notification-icon"
+        >
           🔔
+          {unreadCount > 0 && (
+            <span className="notification-badge">{unreadCount}</span>
+          )}
         </span>
         <span title="Create Post" onClick={openModal}>
           ➕
         </span>
-        <span title="Messages" onClick={() => alert("Messages panel would open here")}>
+        <span title="Messages" onClick={() => alert("Messages feature coming soon!")}>
           💬
         </span>
-        <span title="Profile" onClick={() => alert("Go to profile")}>👤</span>
+        <span title="Profile">👤</span>
       </div>
     </div>
   );
